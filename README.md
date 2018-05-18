@@ -1,1 +1,1 @@
-# LoLStatsCU
+# LoLStats
