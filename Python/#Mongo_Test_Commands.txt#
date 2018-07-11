@@ -1,0 +1,26 @@
+db.games.aggregate([
+	{
+		$project:
+		{
+			participantIdentities:
+			{	
+				$filter:
+				{
+					input:"$participantIdentities",
+					as:"identity",
+					cond:
+						{
+						$eq: ["$$identity.participantId", 2]
+						}
+					
+				}
+			},
+			"participantIdentities.timeline":0
+			
+		}
+		
+	
+	}
+
+]
+).pretty()

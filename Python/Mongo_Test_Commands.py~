@@ -1,0 +1,32 @@
+from pymongo import MongoClient
+
+client = MongoClient()
+db = client['LoLStats']
+
+games_collection = db['games']
+
+games_collection.aggregate([
+	{
+		'$project':
+		{
+			'participantIdentities':
+			{	
+				'$filter':
+				{
+					'input':"$participantIdentities",
+					'as':"identity",
+					'cond':
+						{
+						'$eq': ["$$identity.participantId", 2]
+						}
+					
+				}
+			}
+			
+		}
+		
+	
+	}
+
+]
+).pretty()

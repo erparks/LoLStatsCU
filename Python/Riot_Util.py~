@@ -1,0 +1,23 @@
+def lp_from_league(league_data):
+    tier = league_data['tier']
+    rank = league_data['rank']
+    lp   = int(league_data['leaguePoints'])
+
+    if tier == 'CHALLENGER' or tier == 'MASTER':
+        return 2500 + lp
+    elif tier == 'DIAMOND':
+        return 2000 + lp_from_rank(rank) + lp
+
+
+
+def lp_from_rank(rank):
+    if rank == 'I':
+        return 400
+    elif rank == 'II':
+        return 300
+    elif rank == 'III':
+        return 200
+    elif rank == 'IV':
+        return 100
+    else:
+        return 0
