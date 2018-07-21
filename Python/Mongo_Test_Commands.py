@@ -1,10 +1,11 @@
 from pymongo import MongoClient
 from pprint import pprint
+import json
 
 client = MongoClient()
-db = client['LoLStats']
+db = client['LoLData']
 
-games_collection = db['games']
+games_collection = db['gamesNA1']
 
 cursor = games_collection.aggregate([
     {
@@ -33,6 +34,14 @@ cursor = games_collection.aggregate([
 ]
 )
 
+cursor = games_collection.find({},{"teams":1})
+
 
 for document in cursor: 
-    pprint(document)
+    for key, value in document.items():
+        if key == "teams":
+            for obj in value:
+                print(type(obj['players'][0]))
+                for pkey, pval in obj['players'][0].items():
+                    print(pkey)
+                    
